@@ -2,10 +2,16 @@
 Name=MiniTosh
 Comment=Minimal macOS-inspired icon theme
 Inherits=Adwaita,breeze,hicolor
-
-Directories=apps/scalable
+Directories=apps/scalable,apps/scalable/links
 
 [apps/scalable]
+Size=64
+Context=Applications
+MinSize=16
+MaxSize=512
+Type=Scalable
+
+[apps/scalable/links]
 Size=64
 Context=Applications
 MinSize=16
