@@ -31,3 +31,10 @@ To install MiniTosh locally on your system:
 
 ## New icons?
 You can follow the design rules withing the CONTRIBUTING.md file and design icons using the templates. Export them as .svg and make a PR or issue and share them. You can also just ask for certain icons by adding an issue.
+
+## Next Up?
+
+- [ ] gnome text editor
+- [ ] gnome tweaks
+- [ ] fedora media writer
+- [ ] github desktop
