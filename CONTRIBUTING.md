@@ -16,12 +16,36 @@ apps/scalable/links/    Relative symlinks to base icons (alternative names)
 templates/              Starter SVGs with a helper grid
 ```
 
-## Designing an icon
+## Design standards
 
-1. Start from one of the files in [`templates/`](https://github.com/JasperBroeck/MiniTosh-Icons/tree/main/templates) using any SVG-compatible editor (Inkscape, Figma, Penpot, ...).
+Every MiniTosh icon follows the same shape and proportions so the pack feels consistent.
+
+| Property | Value |
+|---|---|
+| Canvas | 64 × 64 px |
+| Icon shape | 56 × 56 px, centered (4 px of empty space on every side) |
+| Icon corner radius | 13 px |
+| Center guide (circle) | 40 px diameter, dead center |
+| Center guide (rounded square) | 40 × 40 px, corner radius 6 px, dead center |
+
+The circle is only a visual aid. The rounded square is the one to follow.
+
+### Placing a logo
+
+Keep important elements, such as a centered logo, inside the 40 × 40 px rounded square.
+
+- **Default:** scale the logo so its largest dimension is **40 px**, then center it.
+- **Logos with sharp corners or square edges:** these look larger than round logos at the same size, so scale them down a little. **38 px** is usually enough. Only go smaller if it's really necessary.
+- Going slightly outside the rounded square is fine. Just don't push important parts of the logo toward the edge of the icon.
+
+Using an app's official logo in an icon is welcome. Logos and trademarks remain the property of their respective owners.
+
+### Using the template
+
+1. Start from one of the files in [`templates/`](https://github.com/JasperBroeck/MiniTosh-Icons/tree/main/templates) in any SVG-compatible editor (Inkscape, Figma, Penpot, ...).
 2. Use the helper grid in the template while designing.
-3. **Delete the grid** from the file once the icon is finished.
-4. Save the result as a clean, plain `.svg`.
+3. **Delete the grid** from your file once the icon is finished.
+4. Save the result as a clean, plain `.svg` file. Other formats, including `.svgz`, are not accepted.
 
 ## Adding a new icon
 
@@ -35,7 +59,7 @@ Then submit it in one of two ways:
 - **Pull request:** add the SVG and include the app name, what it's used for and a link to the app.
 - **Issue:** attach the `.svg` file with the same information. We'll review it and add it if it fits the style of the pack.
 
-Icons need to follow the MiniTosh design standards to be accepted. If you're unsure, open an issue first.
+Icons need to follow the [design standards](#design-standards) to be accepted. If you're unsure, open an issue first.
 
 ## Adding a link (when an icon doesn't show up)
 
@@ -49,7 +73,7 @@ Look at the app's `.desktop` file:
 grep '^Icon=' /usr/share/applications/<app>.desktop
 ```
 
-For Flatpaks, check `/var/lib/flatpak/exports/share/applications/` (system) or `~/.local/share/flatpak/exports/share/applications/` (user). The value after `Icon=` is the exact name the app requests. Flatpak apps usually use their app ID, e.g. `org.gnome.Nautilus`.
+For Flatpaks, check `/var/lib/flatpak/exports/share/applications/` (system) or `~/.local/share/flatpak/exports/share/applications/` (user). Some apps also store their `.desktop` files in `~/.local/share/applications/`. The value after `Icon=` is the exact name the app requests. Flatpak apps usually use their app ID, e.g. `org.gnome.Nautilus`.
 
 ### 2. Create the link
 
@@ -59,7 +83,7 @@ From inside `apps/scalable/links/`:
 ln -s ../base-name.svg requested-name.svg
 ```
 
-Example:
+**Example:** the app requests `org.gnome.Nautilus` and the base icon is `file-manager.svg`:
 
 ```bash
 ln -s ../file-manager.svg org.gnome.Nautilus.svg
@@ -68,24 +92,42 @@ ln -s ../file-manager.svg org.gnome.Nautilus.svg
 ### Link rules
 
 - **Relative links only.** Always start the target with `../`. Absolute paths break for everyone else.
-- **Copy the requested name exactly.** Icon names are case-sensitive, so `Alacritty.svg` and `Nextcloud.svg` are intentionally capitalised. Don't "fix" those.
-- **Never reuse a name** that already exists in `apps/scalable/`.
-- Check for broken links before committing: `find apps -xtype l` should print nothing.
+- **Copy the requested name exactly.** Icon names are case-sensitive, so some links are intentionally capitalised (for example `Alacritty.svg` and `Nextcloud.svg`, which point to `alacritty.svg` and `nextcloud.svg`). Don't "fix" those.
+- **Never create a link with the same name as an existing file in `apps/scalable/`.** Names are case-sensitive.
+- Check for broken links before committing. Run this from the root of the repository; it should print nothing:
+
+  ```bash
+  find apps -xtype l
+  ```
+
+## Reporting a problem
+
+Open an issue and include:
+
+- The name of the app
+- The `Icon=` value from its `.desktop` file (see [Find the name the app wants](#1-find-the-name-the-app-wants))
+- Where it's installed from (native package, Flatpak, Snap, ...)
+- A screenshot, if the problem is how an icon looks
 
 ## Testing locally
 
 Copy or link the repo into your icon folder, then restart the app (or log out and in) to see changes:
 
 ```bash
-ln -s /path/to/MiniTosh-Icons ~/.local/share/icons/MiniTosh
+ln -s /PATH/TO/MiniTosh-Icons ~/.local/share/icons/MiniTosh
 ```
 
 Then select **MiniTosh** in GNOME Tweaks (or your desktop's appearance settings).
 
 ## Checklist before opening a PR
 
-- [ ] SVG is clean and the helper grid has been removed
+- [ ] The icon follows the [design standards](#design-standards)
+- [ ] SVG is clean, saved as plain `.svg`, and the helper grid has been removed
 - [ ] Base icon is in `apps/scalable/` with a lowercase-dash name
-- [ ] Any extra names are relative symlinks in `apps/scalable/links/`
+- [ ] Any (optional) extra names are relative symlinks in `apps/scalable/links/`
 - [ ] The icon shows up correctly in the real app
 - [ ] `find apps -xtype l` reports no broken links
+
+## License
+
+By submitting an icon, you agree to license it under the same license as this repository.
