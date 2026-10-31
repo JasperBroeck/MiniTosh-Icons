@@ -1,6 +1,6 @@
 <!--
 <p align="center">
-  <img src="icons/logo.svg" width="128" alt="MiniTosh logo">
+  <img src="apps/scalable/logo.svg" width="128" alt="MiniTosh logo">
 </p>
 -->
 
