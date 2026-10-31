@@ -1,0 +1,11 @@
+[Icon Theme]
+Name=MiniTosh
+Comment=Minimal mac-like icon theme.
+Inherits=Colloid,hicolor,breeze
+
+[apps/scalable]
+Size=64
+Context=Applications
+MinSize=16
+MaxSize=512
+Type=Scalable
