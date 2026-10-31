@@ -1,8 +1,4 @@
-<!--
-<p align="center">
-  <img src="apps/scalable/logo.svg" width="128" alt="MiniTosh logo">
-</p>
--->
+![logo.svg](apps/scalable/logo.svg)
 
 # MiniTosh-Icons
 
