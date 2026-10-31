@@ -38,3 +38,4 @@ You can follow the design rules withing the CONTRIBUTING.md file and design icon
 - [ ] gnome tweaks
 - [ ] fedora media writer
 - [ ] github desktop
+- [ ] nextcloud desktop client
