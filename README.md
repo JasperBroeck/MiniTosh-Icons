@@ -1,3 +1,9 @@
+<!--
+<p align="center">
+  <img src="icons/logo.svg" width="128" alt="MiniTosh logo">
+</p>
+-->
+
 # MiniTosh-Icons
 
 > Minimal macOS-inspired icon theme based on the [Colloid icon theme by vinceliuice](https://github.com/vinceliuice/Colloid-icon-theme)
