@@ -4,13 +4,9 @@
 - [x] Calculator (GNOME)
 - [x] Loupe (image viewer)
 - [x] Papers (document viewer)
-- [ ] System Monitor
-- [ ] Console (GNOME)
-- [ ] Showtime (video player)
-- [ ] Flatseal
-- [ ] Extension Manager
-- [ ] KeePassXC
-- [ ] qBittorrent
+- [x] System Monitor
+- [x] Flatseal
+- [x] Extension Manager
 
 ## GNOME and Fedora core
 - [ ] Calendar
