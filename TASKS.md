@@ -18,7 +18,7 @@
 - [ ] Web (Epiphany)
 
 ## Terminals and editors
-- [ ] VSCodium
+- [x] VSCodium
 
 ## Developer tools
 - [ ] Podman Desktop
@@ -72,6 +72,8 @@
 - [ ] GParted
 - [ ] Timeshift
 - [ ] Wine
+- [ ] Pika Backup
+- [ ] Deja Dup
 
 ## Browsers
 - [ ] LibreWolf
