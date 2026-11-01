@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MiniTosh Icons</title>
 <meta name="description" content="A minimal macOS-inspired app icon theme for Linux.">
-<link rel="icon" href="icons/logo.svg">
+<link rel="icon" href="icons/firefox.svg">
 <style>
 :root {
   --bg: #f2f3f5;
@@ -112,6 +112,16 @@ dialog p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.9rem; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-top: 1rem; }
 .chips code { background: var(--bg); border-radius: 0.5rem; padding: 0.15rem 0.5rem; overflow-wrap: anywhere; }
 .dlg-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+.nav {
+  position: absolute; top: 5.75rem; width: 2.5rem; height: 2.5rem; padding: 0 0 0.15rem;
+  display: grid; place-items: center; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  font: inherit; font-size: 1.5rem; line-height: 1; cursor: pointer;
+}
+.nav[hidden] { display: none; }
+.nav.prev { left: 0.75rem; }
+.nav.next { right: 0.75rem; }
+.nav:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
 footer p { margin: 0 0 0.4rem; }
@@ -166,9 +176,11 @@ footer p { margin: 0 0 0.4rem; }
 </footer>
 
 <dialog id="dlg" aria-labelledby="dlg-name">
+  <button id="dlg-prev" class="nav prev" type="button" aria-label="Previous icon">&lsaquo;</button>
+  <button id="dlg-next" class="nav next" type="button" aria-label="Next icon">&rsaquo;</button>
   <img id="dlg-img" alt="">
-  <h2 id="dlg-name"></h2>
-  <p>Icon name</p>
+  <h2 id="dlg-name" aria-live="polite"></h2>
+  <p>Icon name <span id="dlg-pos"></span></p>
   <div id="dlg-aliases" hidden>
     <p>Also available as</p>
     <div id="dlg-chips" class="chips"></div>
@@ -189,6 +201,8 @@ footer p { margin: 0 0 0.4rem; }
   var dlg = document.getElementById('dlg');
   var icons = [];
   var current = null;
+  var shown = [];
+  var index = 0;
 
   function flash(btn, text) {
     var old = btn.textContent;
@@ -203,7 +217,7 @@ footer p { margin: 0 0 0.4rem; }
 
   function render() {
     var term = q.value.trim().toLowerCase();
-    var shown = icons.filter(function (i) {
+    shown = icons.filter(function (i) {
       return !term || i.name.toLowerCase().indexOf(term) !== -1 ||
         i.aliases.some(function (a) { return a.toLowerCase().indexOf(term) !== -1; });
     });
@@ -236,7 +250,19 @@ footer p { margin: 0 0 0.4rem; }
   }
 
   function openIcon(i) {
+    showIcon(i);
+    if (!dlg.open) dlg.showModal();
+  }
+
+  function step(d) {
+    if (shown.length < 2) return;
+    index = (index + d + shown.length) % shown.length;
+    showIcon(shown[index]);
+  }
+
+  function showIcon(i) {
     current = i;
+    index = Math.max(0, shown.indexOf(i));
     document.getElementById('dlg-img').src = 'icons/' + i.name + '.svg';
     document.getElementById('dlg-name').textContent = i.name;
     var dl = document.getElementById('dlg-dl');
@@ -250,12 +276,21 @@ footer p { margin: 0 0 0.4rem; }
       chips.appendChild(c);
     });
     document.getElementById('dlg-aliases').hidden = !i.aliases.length;
-    dlg.showModal();
+    document.getElementById('dlg-pos').textContent = '(' + (index + 1) + ' of ' + shown.length + ')';
+    var multi = shown.length > 1;
+    document.getElementById('dlg-prev').hidden = !multi;
+    document.getElementById('dlg-next').hidden = !multi;
   }
 
   document.getElementById('dlg-close').addEventListener('click', function () { dlg.close(); });
   document.getElementById('dlg-copy').addEventListener('click', function (e) { copy(current.name, e.currentTarget); });
   dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  document.getElementById('dlg-prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('dlg-next').addEventListener('click', function () { step(1); });
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+  });
   document.getElementById('copy-cmd').addEventListener('click', function (e) {
     copy(document.getElementById('cmd').textContent, e.currentTarget);
   });
