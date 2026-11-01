@@ -2,8 +2,8 @@
 
 ## Start with these
 - [x] Calculator (GNOME)
-- [ ] Loupe (image viewer)
-- [ ] Papers (document viewer)
+- [x] Loupe (image viewer)
+- [x] Papers (document viewer)
 - [ ] System Monitor
 - [ ] Console (GNOME)
 - [ ] Showtime (video player)
