@@ -1,7 +1,7 @@
 # Icon wishlist
 
 ## Start with these
-- [ ] Calculator (GNOME)
+- [x] Calculator (GNOME)
 - [ ] Loupe (image viewer)
 - [ ] Papers (document viewer)
 - [ ] System Monitor
