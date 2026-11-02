@@ -9,13 +9,11 @@
 - [x] Extension Manager
 
 ## GNOME and Fedora core
-- [ ] Calendar
-- [ ] Contacts
-- [ ] Clocks
-- [ ] Weather
-- [ ] Maps
-- [ ] Connections
-- [ ] Web (Epiphany)
+- [x] Calendar
+- [x] Contacts
+- [x] Clocks
+- [x] Weather
+- [x] Web (Epiphany)
 
 ## Terminals and editors
 - [x] VSCodium
@@ -24,7 +22,7 @@
 - [ ] Podman Desktop
 - [ ] Arduino IDE
 - [ ] Godot
-- [ ] Ollama
+- [x] Ollama
 - [ ] LM Studio
 
 ## 3D printing, CAD and electronics
@@ -61,7 +59,7 @@
 - [ ] Proton Mail
 - [ ] Proton VPN
 - [ ] Proton Pass
-- [ ] Tailscale
+- [x] Tailscale
 
 ## Gaming
 - [ ] Heroic Games Launcher
